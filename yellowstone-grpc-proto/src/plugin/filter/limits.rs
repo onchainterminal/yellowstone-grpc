@@ -1,6 +1,6 @@
 use {
     serde::{de, Deserialize, Deserializer},
-    solana_pubkey::Pubkey,
+    solana_sdk::pubkey::Pubkey,
     std::collections::HashSet,
 };
 

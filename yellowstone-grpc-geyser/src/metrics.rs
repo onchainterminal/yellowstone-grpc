@@ -13,7 +13,7 @@ use {
     },
     log::{error, info},
     prometheus::{IntCounterVec, IntGauge, IntGaugeVec, Opts, Registry, TextEncoder},
-    solana_clock::Slot,
+    solana_sdk::clock::Slot,
     std::{
         collections::{hash_map::Entry as HashMapEntry, HashMap},
         convert::Infallible,

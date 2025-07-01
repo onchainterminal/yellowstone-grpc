@@ -75,11 +75,6 @@ impl GeyserPlugin for Plugin {
         if let Some(worker_threads) = config.tokio.worker_threads {
             builder.worker_threads(worker_threads);
         }
-        if let Some(tokio_cpus) = config.tokio.affinity.clone() {
-            builder.on_thread_start(move || {
-                affinity::set_thread_affinity(&tokio_cpus).expect("failed to set affinity")
-            });
-        }
         let runtime = builder
             .thread_name_fn(crate::get_thread_name)
             .enable_all()
@@ -255,7 +250,7 @@ impl GeyserPlugin for Plugin {
     }
 
     fn account_data_notifications_enabled(&self) -> bool {
-        true
+        false
     }
 
     fn account_data_snapshot_notifications_enabled(&self) -> bool {
@@ -263,11 +258,11 @@ impl GeyserPlugin for Plugin {
     }
 
     fn transaction_notifications_enabled(&self) -> bool {
-        true
+        false
     }
 
     fn entry_notifications_enabled(&self) -> bool {
-        true
+        false
     }
 }
 

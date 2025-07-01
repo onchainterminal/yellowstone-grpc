@@ -14,10 +14,12 @@ use {
         SlotStatus as GeyserSlotStatus,
     },
     prost_types::Timestamp,
-    solana_clock::Slot,
-    solana_hash::{Hash, HASH_BYTES},
-    solana_pubkey::Pubkey,
-    solana_signature::Signature,
+    solana_sdk::{
+        clock::Slot,
+        hash::{Hash, HASH_BYTES},
+        pubkey::Pubkey,
+        signature::Signature,
+    },
     std::{
         collections::HashSet,
         ops::{Deref, DerefMut},
