@@ -250,19 +250,19 @@ impl GeyserPlugin for Plugin {
     }
 
     fn account_data_notifications_enabled(&self) -> bool {
-        false
+        true
     }
 
     fn account_data_snapshot_notifications_enabled(&self) -> bool {
-        false
+        true
     }
 
     fn transaction_notifications_enabled(&self) -> bool {
-        false
+        true
     }
 
     fn entry_notifications_enabled(&self) -> bool {
-        false
+        true
     }
 }
 

@@ -1,23 +1,18 @@
 {
   "libpath": "/Users/yosadchyi/workspace/oct/yellowstone-grpc/target/debug/deps/libyellowstone_grpc_geyser.dylib",
   "log": {
-    "level": "info"
-  },
-  "tokio": {
-    "worker_threads": 8,
-    "affinity": "0-1,12-13"
+    "level": "debug"
   },
   "grpc": {
-    "address": "127.0.0.1:10000",
+    "address": "0.0.0.0:10000",
     "compression": {
-      "accept": ["gzip", "zstd"],
-      "send": ["gzip", "zstd"]
+      "accept": [
+        "gzip"
+      ],
+      "send": [
+        "gzip"
+      ]
     },
-    "server_http2_adaptive_window": null,
-    "server_http2_keepalive_interval": null,
-    "server_http2_keepalive_timeout": null,
-    "server_initial_connection_window_size": null,
-    "server_initial_stream_window_size": null,
     "max_decoding_message_size": "4_194_304",
     "snapshot_plugin_channel_capacity": null,
     "snapshot_client_channel_capacity": "50_000_000",
@@ -25,18 +20,17 @@
     "unary_concurrency_limit": 100,
     "unary_disabled": false,
     "x_token": null,
-    "replay_stored_slots": 0,
-    "filter_name_size_limit": 128,
-    "filter_names_size_limit": 4096,
+    "filter_name_size_limit": 32,
+    "filter_names_size_limit": 1024,
     "filter_names_cleanup_interval": "1s",
     "filter_limits": {
       "accounts": {
         "max": 1,
         "any": false,
         "account_max": 10,
-        "account_reject": ["TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"],
+        "account_reject": [],
         "owner_max": 10,
-        "owner_reject": ["11111111111111111111111111111111"],
+        "owner_reject": [],
         "data_slice_max": 2
       },
       "slots": {
@@ -47,7 +41,6 @@
         "any": false,
         "account_include_max": 10,
         "account_include_reject": [
-          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
         ],
         "account_exclude_max": 10,
         "account_required_max": 10
@@ -57,7 +50,6 @@
         "any": false,
         "account_include_max": 10,
         "account_include_reject": [
-          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
         ],
         "account_exclude_max": 10,
         "account_required_max": 10
@@ -65,9 +57,8 @@
       "blocks": {
         "max": 1,
         "account_include_max": 10,
-        "account_include_any": false,
+        "account_include_any": true,
         "account_include_reject": [
-          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
         ],
         "include_transactions": true,
         "include_accounts": false,

@@ -449,6 +449,7 @@ impl GrpcService {
             service = service.send_compressed(encoding);
         }
 
+        info!("[GEYSER] start grpc server {}", config.address);
         // Run geyser message loop
         let (messages_tx, messages_rx) = mpsc::unbounded_channel();
         spawn_blocking(move || {
@@ -480,6 +481,7 @@ impl GrpcService {
 
             server_builder
                 .layer(interceptor(move |request: Request<()>| {
+                    info!("received request: {:?}", request);
                     if let Some(x_token) = &config.x_token {
                         match request.metadata().get("x-token") {
                             Some(token) if x_token == token => Ok(request),
@@ -887,9 +889,10 @@ impl GrpcService {
                                 metrics::update_subscriptions(&endpoint, Some(&filter), Some(&filter_new));
                                 filter = filter_new;
                                 DebugClientMessage::maybe_send(&debug_client_tx, || DebugClientMessage::UpdateFilter { id, filter: Box::new(filter.clone()) });
-                                info!("client #{id}: filter updated");
+                                info!("[slot] client #{id}: filter updated");
 
                                 if let Some(from_slot) = from_slot {
+                                    info!("from slot is set");
                                     let Some(replay_stored_slots_tx) = &replay_stored_slots_tx else {
                                         info!("client #{id}: from_slot is not supported");
                                         tokio::spawn(async move {
