@@ -58,6 +58,7 @@ use {
         },
     },
 };
+use crate::command::TcpCommandClient;
 
 #[derive(Debug)]
 struct BlockhashStatus {
@@ -844,7 +845,7 @@ impl GrpcService {
     ) {
         let mut filter = Filter::default();
         metrics::update_subscriptions(&endpoint, None, Some(&filter));
-
+        
         metrics::connections_total_inc();
         DebugClientMessage::maybe_send(&debug_client_tx, || DebugClientMessage::UpdateFilter {
             id,
@@ -867,6 +868,10 @@ impl GrpcService {
         }
 
         if is_alive {
+            spawn_blocking(move || {
+                let mut command_client = TcpCommandClient::connect("127.0.0.1:9292").unwrap();
+                let _ = command_client.send_go();
+            });
             'outer: loop {
                 tokio::select! {
                     mut message = client_rx.recv() => {
